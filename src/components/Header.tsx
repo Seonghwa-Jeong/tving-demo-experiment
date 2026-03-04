@@ -33,39 +33,23 @@ export default function Header() {
 
         {/* Nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          <Link href="/" className="text-white/80 hover:text-white transition-colors">
-            홈
-          </Link>
-          <Link
-            href="/?category=드라마"
-            className="text-white/80 hover:text-white transition-colors"
-          >
-            드라마
-          </Link>
-          <Link
-            href="/?category=영화"
-            className="text-white/80 hover:text-white transition-colors"
-          >
-            영화
-          </Link>
-          <Link
-            href="/?category=예능"
-            className="text-white/80 hover:text-white transition-colors"
-          >
-            예능
-          </Link>
-          <Link
-            href="/?category=키즈"
-            className="text-white/80 hover:text-white transition-colors"
-          >
-            키즈
-          </Link>
-          <Link
-            href="/?category=스포츠"
-            className="text-white/80 hover:text-white transition-colors"
-          >
-            스포츠
-          </Link>
+          {[
+            { label: "홈", href: "/", category: "홈" },
+            { label: "드라마", href: "/?category=드라마", category: "드라마" },
+            { label: "영화", href: "/?category=영화", category: "영화" },
+            { label: "예능", href: "/?category=예능", category: "예능" },
+            { label: "키즈", href: "/?category=키즈", category: "키즈" },
+            { label: "스포츠", href: "/?category=스포츠", category: "스포츠" },
+          ].map(({ label, href, category }) => (
+            <Link
+              key={category}
+              href={href}
+              className="text-white/80 hover:text-white transition-colors"
+              onClick={() => amplitude.track("Navigation Clicked", { category })}
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
 
         {/* Right */}
