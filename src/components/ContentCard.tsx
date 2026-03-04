@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useApp } from "@/context/AppContext";
 import { Content } from "@/data/mockData";
+import * as amplitude from "@amplitude/unified";
 
 interface ContentCardProps {
   content: Content;
@@ -46,6 +47,11 @@ export default function ContentCard({ content }: ContentCardProps) {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                amplitude.track(favorite ? "Favorite Removed" : "Favorite Added", {
+                  content_id: content.id,
+                  content_title: content.title,
+                  content_category: content.category,
+                });
                 toggleFavorite(content.id);
               }}
               className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"

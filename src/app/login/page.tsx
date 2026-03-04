@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/context/AppContext";
+import * as amplitude from "@amplitude/unified";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,10 +16,13 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    amplitude.track("Login Attempted", { email });
     const ok = login(email, password);
     if (ok) {
+      amplitude.track("Login Succeeded");
       router.push("/");
     } else {
+      amplitude.track("Login Failed", { email });
       setError("이메일 또는 비밀번호가 올바르지 않습니다.");
     }
   };

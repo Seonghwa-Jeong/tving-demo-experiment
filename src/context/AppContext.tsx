@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Content } from "@/data/mockData";
+import * as amplitude from "@amplitude/unified";
 
 export interface User {
   id: string;
@@ -57,6 +58,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       const { password: _, ...userData } = found;
       setUser(userData);
       localStorage.setItem("tving_user", JSON.stringify(userData));
+      amplitude.setUserId(found.id);
 
       const userFavorites = JSON.parse(
         localStorage.getItem(`tving_favorites_${found.id}`) || "[]"
@@ -91,6 +93,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const { password: _, ...userData } = newUser;
     setUser(userData);
     localStorage.setItem("tving_user", JSON.stringify(userData));
+    amplitude.setUserId(newUser.id);
     setFavorites([]);
     setWatchHistory([]);
     return true;
@@ -105,6 +108,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setFavorites([]);
     setWatchHistory([]);
     localStorage.removeItem("tving_user");
+    amplitude.reset();
   };
 
   const toggleFavorite = (contentId: string) => {

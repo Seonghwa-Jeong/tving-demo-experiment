@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useApp } from "@/context/AppContext";
+import * as amplitude from "@amplitude/unified";
 
 export default function Header() {
   const { user, logout } = useApp();
@@ -11,6 +12,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
+    amplitude.track("Logged Out");
     logout();
     router.push("/");
     setMenuOpen(false);

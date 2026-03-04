@@ -3,6 +3,7 @@ import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
 import Header from "@/components/Header";
+import AmplitudeProvider from "@/components/AmplitudeProvider";
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ["latin"],
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${notoSansKR.className} antialiased bg-[#0f0f0f] text-white`}>
+        <AmplitudeProvider />
         <AppProvider>
           <Header />
           <main>{children}</main>

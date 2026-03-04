@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/context/AppContext";
+import * as amplitude from "@amplitude/unified";
 
 export default function SignupPage() {
   const [name, setName] = useState("");
@@ -34,8 +35,10 @@ export default function SignupPage() {
 
     const ok = signup(name, email, password);
     if (ok) {
+      amplitude.track("Sign Up Completed", { name, email });
       router.push("/");
     } else {
+      amplitude.track("Sign Up Failed", { email, reason: "email_already_exists" });
       setError("이미 사용 중인 이메일입니다.");
     }
   };

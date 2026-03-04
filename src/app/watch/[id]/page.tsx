@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { contents } from "@/data/mockData";
 import { useApp } from "@/context/AppContext";
+import * as amplitude from "@amplitude/unified";
 
 export default function WatchPage() {
   const { id } = useParams<{ id: string }>();
@@ -20,6 +21,12 @@ export default function WatchPage() {
     if (!content) return;
     const initial = getWatchProgress(content.id);
     setSimulatedProgress(initial);
+    amplitude.track("Content Play Started", {
+      content_id: content.id,
+      content_title: content.title,
+      content_category: content.category,
+      resume_progress: initial,
+    });
 
     // Hide info overlay after 3 seconds
     const timer = setTimeout(() => setShowInfo(false), 3000);
@@ -85,7 +92,14 @@ export default function WatchPage() {
         <div className="flex items-center gap-3">
           {user && (
             <button
-              onClick={() => toggleFavorite(content.id)}
+              onClick={() => {
+                amplitude.track(isFavorite(content.id) ? "Favorite Removed" : "Favorite Added", {
+                  content_id: content.id,
+                  content_title: content.title,
+                  content_category: content.category,
+                });
+                toggleFavorite(content.id);
+              }}
               className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20"
             >
               <svg

@@ -3,9 +3,11 @@
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import { contents } from "@/data/mockData";
 import { useApp } from "@/context/AppContext";
 import ContentRow from "@/components/ContentRow";
+import * as amplitude from "@amplitude/unified";
 
 export default function ContentDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -13,6 +15,17 @@ export default function ContentDetailPage() {
   const { isFavorite, toggleFavorite, user, getWatchProgress } = useApp();
 
   const content = contents.find((c) => c.id === id);
+
+  useEffect(() => {
+    if (!content) return;
+    amplitude.track("Content Viewed", {
+      content_id: content.id,
+      content_title: content.title,
+      content_category: content.category,
+      content_year: content.year,
+    });
+  }, [content?.id]);
+
   if (!content) {
     return (
       <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center pt-16">
@@ -100,7 +113,14 @@ export default function ContentDetailPage() {
 
               {user && (
                 <button
-                  onClick={() => toggleFavorite(content.id)}
+                  onClick={() => {
+                    amplitude.track(favorite ? "Favorite Removed" : "Favorite Added", {
+                      content_id: content.id,
+                      content_title: content.title,
+                      content_category: content.category,
+                    });
+                    toggleFavorite(content.id);
+                  }}
                   className={`flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium border transition-colors ${
                     favorite
                       ? "border-[#FF153C] text-[#FF153C]"
