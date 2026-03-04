@@ -59,6 +59,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       setUser(userData);
       localStorage.setItem("tving_user", JSON.stringify(userData));
       amplitude.setUserId(found.id);
+      amplitude.experiment()?.fetch().then(() => {
+        window.dispatchEvent(new Event("amplitude:variants-updated"));
+      });
 
       const userFavorites = JSON.parse(
         localStorage.getItem(`tving_favorites_${found.id}`) || "[]"
@@ -109,6 +112,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setWatchHistory([]);
     localStorage.removeItem("tving_user");
     amplitude.reset();
+    amplitude.experiment()?.fetch().then(() => {
+      window.dispatchEvent(new Event("amplitude:variants-updated"));
+    });
   };
 
   const toggleFavorite = (contentId: string) => {

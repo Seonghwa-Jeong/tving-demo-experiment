@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useApp } from "@/context/AppContext";
 import { Content } from "@/data/mockData";
 import * as amplitude from "@amplitude/unified";
+import { useAmplitudeExperiment } from "@/hooks/useAmplitudeExperiment";
 
 interface ContentCardProps {
   content: Content;
@@ -14,6 +15,8 @@ export default function ContentCard({ content }: ContentCardProps) {
   const { isFavorite, toggleFavorite, user, getWatchProgress } = useApp();
   const progress = getWatchProgress(content.id);
   const favorite = isFavorite(content.id);
+  const tagVariant = useAmplitudeExperiment("tag-visibility-test");
+  const tagBgColor = tagVariant.payload.background_color as string | undefined;
 
   const formatDuration = (seconds: number) => {
     const h = Math.floor(seconds / 3600);
@@ -116,7 +119,8 @@ export default function ContentCard({ content }: ContentCardProps) {
           {content.genres.slice(0, 2).map((g) => (
             <span
               key={g}
-              className="text-[10px] px-1.5 py-0.5 rounded text-white/60 bg-white/10"
+              className="text-[10px] px-1.5 py-0.5 rounded text-white/60"
+              style={{ backgroundColor: tagBgColor ?? "rgba(255,255,255,0.1)" }}
             >
               {g}
             </span>
