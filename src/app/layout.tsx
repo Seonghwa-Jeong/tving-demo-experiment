@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
 import Header from "@/components/Header";
@@ -22,6 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <Script
+        src="https://cdn.amplitude.com/script/ba621d8cbeb865c11fef1b115063ae2a.experiment.js"
+        strategy="beforeInteractive"
+      />
       <body className={`${notoSansKR.className} antialiased bg-[#0f0f0f] text-white`}>
         <AmplitudeProvider />
         <AppProvider>
