@@ -115,11 +115,11 @@ export default function ContentCard({ content }: ContentCardProps) {
             </>
           )}
         </div>
-        <div className="flex flex-wrap gap-1 mt-1">
+        <div className="flex flex-wrap gap-1.5 mt-1.5">
           {content.genres.slice(0, 2).map((g) => (
             <span
               key={g}
-              className="text-[10px] px-1.5 py-0.5 rounded text-white/60"
+              className="text-[10px] px-2.5 py-1 rounded text-white/60"
               style={{ backgroundColor: tagBgColor ?? "rgba(255,255,255,0.1)" }}
             >
               {g}

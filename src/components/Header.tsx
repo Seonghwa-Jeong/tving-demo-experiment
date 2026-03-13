@@ -87,7 +87,7 @@ export default function Header() {
                   <Link
                     href="/favorites"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2 px-4 py-2 text-sm text-white/80 hover:text-white hover:bg-white/5"
+                    className="flex items-center gap-3 px-5 py-3 text-sm text-white/80 hover:text-white hover:bg-white/5"
                   >
                     <svg
                       className="w-4 h-4"
@@ -107,7 +107,7 @@ export default function Header() {
                   <Link
                     href="/continue-watching"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2 px-4 py-2 text-sm text-white/80 hover:text-white hover:bg-white/5"
+                    className="flex items-center gap-3 px-5 py-3 text-sm text-white/80 hover:text-white hover:bg-white/5"
                   >
                     <svg
                       className="w-4 h-4"
@@ -133,7 +133,7 @@ export default function Header() {
                   <hr className="border-white/10 my-1" />
                   <button
                     onClick={handleLogout}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-white/80 hover:text-white hover:bg-white/5"
+                    className="w-full flex items-center gap-3 px-5 py-3 text-sm text-white/80 hover:text-white hover:bg-white/5"
                   >
                     <svg
                       className="w-4 h-4"

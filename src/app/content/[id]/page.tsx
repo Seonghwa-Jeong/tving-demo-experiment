@@ -102,7 +102,7 @@ export default function ContentDetailPage() {
             <div className="flex items-center gap-3 mb-6">
               <Link
                 href={`/watch/${content.id}`}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-white text-sm hover:opacity-90 transition-opacity"
+                className="flex items-center gap-2 px-8 py-3.5 rounded-lg font-bold text-white text-sm hover:opacity-90 transition-opacity"
                 style={{ backgroundColor: "#FF153C" }}
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -121,7 +121,7 @@ export default function ContentDetailPage() {
                     });
                     toggleFavorite(content.id);
                   }}
-                  className={`flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium border transition-colors ${
+                  className={`flex items-center gap-2 px-7 py-3.5 rounded-lg text-sm font-medium border transition-colors ${
                     favorite
                       ? "border-[#FF153C] text-[#FF153C]"
                       : "border-white/20 text-white/70 hover:border-white/40"
