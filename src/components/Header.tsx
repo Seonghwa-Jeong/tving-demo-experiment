@@ -83,14 +83,14 @@ export default function Header() {
               </button>
 
               {menuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-[#1a1a1a] border border-white/10 rounded-lg shadow-xl py-2">
+                <div className="absolute right-0 mt-2 w-56 bg-[#1a1a1a] border border-white/10 rounded-lg shadow-xl py-2">
                   <Link
                     href="/favorites"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 px-5 py-3 text-sm text-white/80 hover:text-white hover:bg-white/5"
+                    className="flex items-center gap-3 px-6 py-3.5 text-sm text-white/80 hover:text-white hover:bg-white/5"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="w-4 h-4 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -107,10 +107,10 @@ export default function Header() {
                   <Link
                     href="/continue-watching"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-3 px-5 py-3 text-sm text-white/80 hover:text-white hover:bg-white/5"
+                    className="flex items-center gap-3 px-6 py-3.5 text-sm text-white/80 hover:text-white hover:bg-white/5"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="w-4 h-4 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -133,10 +133,10 @@ export default function Header() {
                   <hr className="border-white/10 my-1" />
                   <button
                     onClick={handleLogout}
-                    className="w-full flex items-center gap-3 px-5 py-3 text-sm text-white/80 hover:text-white hover:bg-white/5"
+                    className="w-full flex items-center gap-3 px-6 py-3.5 text-sm text-white/80 hover:text-white hover:bg-white/5"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="w-4 h-4 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
